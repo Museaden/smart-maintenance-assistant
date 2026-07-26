@@ -1,15 +1,23 @@
 """Smart Maintenance Assistant — RAG chatbot UI."""
 
+import os
 import sys
 
-# Force fresh imports when Streamlit hot-reloads (prevents stale src.config cache)
+# Disable progress bars before any HF / sentence-transformers imports (Windows + Streamlit)
+os.environ["TQDM_DISABLE"] = "1"
+os.environ["HF_HUB_DISABLE_PROGRESS_BARS"] = "1"
+
+# Refresh LLM/config modules only — keep embedding model cache alive across reruns
 for _mod in list(sys.modules):
-    if _mod == "src" or _mod.startswith("src."):
+    if _mod in {"src.config", "src.llm", "src.llm_settings", "src.rag"} or _mod.startswith(
+        ("src.llm", "src.config")
+    ):
         del sys.modules[_mod]
 
 import streamlit as st
 
 try:
+    from src.embeddings import get_embedding_model
     from src.llm import get_llm_status, get_openrouter_limits
     from src.rag import ask
     from src.vector_store import collection_count
@@ -22,6 +30,16 @@ st.set_page_config(
     page_icon="🔧",
     layout="wide",
 )
+
+
+@st.cache_resource
+def _warm_embedding_model():
+    """Load MiniLM once per server process to avoid reload Errno 22 crashes."""
+    return get_embedding_model()
+
+
+with st.spinner("Loading embedding model (first time may take a minute)..."):
+    _warm_embedding_model()
 
 st.title("🔧 Smart Maintenance Assistant")
 st.caption(
