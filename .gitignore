@@ -1,0 +1,32 @@
+# Secrets
+.env
+.env.local
+**/.env
+!**/.env.example
+
+# Python
+**/__pycache__/
+**/*.py[cod]
+**/.pytest_cache/
+**/.mypy_cache/
+**/venv/
+**/.venv/
+**/*.egg-info/
+
+# App generated data
+**/chroma_db/
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Jupyter
+**/.ipynb_checkpoints/
+
+# Evaluation outputs
+**/evaluation_and_benchmarks/results/*.json
+
+# Streamlit
+**/.streamlit/secrets.toml

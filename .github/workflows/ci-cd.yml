@@ -1,0 +1,77 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [main, master, develop]
+    tags: ["v*"]
+  pull_request:
+    branches: [main, master, develop]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-cd-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Syntax check (compileall)
+        run: python -m compileall -q app.py ingest.py src tests evaluation_and_benchmarks
+
+      - name: Run unit tests
+        env:
+          LLM_PROVIDER: auto
+          GROQ_API_KEY: ""
+          OPENROUTER_API_KEY: ""
+          OPENAI_API_KEY: ""
+        run: pytest tests -q --tb=short -p no:cacheprovider
+
+      - name: Validate benchmark questions file
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          path = Path("evaluation_and_benchmarks/questions.json")
+          data = json.loads(path.read_text(encoding="utf-8"))
+          assert data["question_count"] == len(data["questions"]) == 20
+          for q in data["questions"]:
+              assert q["id"] and q["question"] and q["expected_keywords"]
+          print("Benchmark questions OK:", len(data["questions"]))
+          PY
+
+  deploy-notes:
+    name: Deploy Notes
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    steps:
+      - name: Streamlit Cloud reminders
+        run: |
+          echo "=== Tests passed — ready to deploy ==="
+          echo "Streamlit Cloud: https://share.streamlit.io — main file app.py"
+          echo "Add GROQ_API_KEY in Streamlit secrets — never commit .env"

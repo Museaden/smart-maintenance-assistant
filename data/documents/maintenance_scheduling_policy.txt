@@ -1,0 +1,37 @@
+MAINTENANCE SCHEDULING POLICY
+=============================
+
+OBJECTIVE
+Balance production demand with equipment reliability through integrated planning.
+
+PLANNING HORIZON
+  Weekly — operations coordination meeting (Monday 09:00)
+  Monthly — PM schedule freeze for next calendar month
+  Quarterly — major outage window negotiation with production
+
+WORK PRIORITIZATION
+  1. Safety and regulatory compliance
+  2. Emergency breakdowns
+  3. Predictive alerts (Critical > High > Medium)
+  4. Scheduled PM
+  5. Discretionary improvements
+
+WINDOW ALLOCATION
+  Production Line 1: Saturday 06:00–18:00 default maintenance window
+  Line 2: Sunday same hours
+  Utilities (boiler/chiller): Tuesday night 22:00–06:00
+
+RESOURCE PLANNING
+  Planner assigns craft by skill matrix. Minimum 2 electricians for MCC work.
+  Overtime requires maintenance manager approval.
+
+DEFERRAL RULES
+  PM may defer once max 14 days with production VP approval.
+  PdM Critical alerts cannot defer without reliability engineer sign-off.
+  Deferred work auto-escalates to red flag in weekly meeting.
+
+METRICS
+  Schedule compliance, wrench time, backlog weeks, PM/PdM ratio target 60/40.
+
+DOCUMENTATION
+  Schedule changes logged in CMMS with reason code.

@@ -1,0 +1,38 @@
+LOCKOUT/TAGOUT PROCEDURES — SITE STANDARD EHS-LOTO-001
+========================================================
+
+1. PURPOSE
+Protect personnel from unexpected energization during maintenance.
+
+2. SCOPE
+All equipment with electrical, pneumatic, hydraulic, thermal, chemical, or gravitational energy.
+
+3. PROCEDURE (SEVEN STEPS)
+   a. Notify affected personnel
+   b. Shut down equipment using normal stopping procedure
+   c. Isolate all energy sources
+   d. Apply locks and tags (one person, one lock per energy source)
+   e. Release stored energy (bleed, block, dissipate)
+   f. Verify zero energy (try start, check voltage, check pressure)
+   g. Perform work
+
+4. GROUP LOTO
+Complex jobs use group lockbox. Lead craft holds key. Each worker applies personal lock to box.
+
+5. SHIFT CHANGE
+Outgoing worker removes only their lock after briefing incoming worker who applies their lock.
+
+6. PROHIBITED
+Never use someone else's lock. Never defeat interlocks without written MOC. Never test machine with guards removed.
+
+7. PREDICTIVE MAINTENANCE NOTE
+Sensor installation on running equipment requires alternative safeguards per risk assessment RA-LOTO-09.
+
+8. TRAINING
+Annual refresher required. Contractors must sign LOTO acknowledgment before site access.
+
+9. AUDIT
+EHS audits 10% of LOTO jobs monthly. Deficiencies corrected within 48 hours.
+
+10. EMERGENCY REMOVAL OF LOCK
+Only plant manager may authorize. Investigate incident. Document on form LOTO-EMR-01.

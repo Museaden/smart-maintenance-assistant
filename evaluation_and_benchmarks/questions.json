@@ -1,0 +1,168 @@
+{
+  "benchmark_name": "Smart Maintenance Assistant — RAG Eval Set v1",
+  "version": "1.0",
+  "question_count": 20,
+  "scoring": "keyword_overlap",
+  "questions": [
+    {
+      "id": "Q01",
+      "category": "pump",
+      "question": "What vibration level is critical for Pump-3?",
+      "gold_answer": "Critical vibration for Pump-3 is above 7.0 mm/s RMS — reduce load immediately and plan bearing replacement within 24 hours.",
+      "expected_keywords": ["7.0", "mm/s", "critical", "24"],
+      "reference_docs": ["pump_maintenance_sop.md"]
+    },
+    {
+      "id": "Q02",
+      "category": "pump",
+      "question": "What is the warning vibration range for Pump-3, and when should inspection be scheduled?",
+      "gold_answer": "Warning level is 4.5–7.0 mm/s RMS; schedule inspection within 72 hours.",
+      "expected_keywords": ["4.5", "7.0", "72"],
+      "reference_docs": ["pump_maintenance_sop.md"]
+    },
+    {
+      "id": "Q03",
+      "category": "pump",
+      "question": "What bearing housing temperature is critical for Pump-3?",
+      "gold_answer": "Critical bearing housing temperature is above 80°C — stop the pump if process allows and verify cooling and bearing condition.",
+      "expected_keywords": ["80", "critical", "stop"],
+      "reference_docs": ["pump_maintenance_sop.md"]
+    },
+    {
+      "id": "Q04",
+      "category": "pump",
+      "question": "What indicates high bearing failure risk for Pump-3 within 7 days?",
+      "gold_answer": "High risk when ALL are true: vibration above 6.5 mm/s for 3+ consecutive readings, bearing temperature above 75°C, and hours since last service exceed 800.",
+      "expected_keywords": ["6.5", "75", "800"],
+      "reference_docs": ["pump_maintenance_sop.md"]
+    },
+    {
+      "id": "Q05",
+      "category": "hvac",
+      "question": "When should I replace HVAC Unit-7 filters?",
+      "gold_answer": "Replace filters when differential pressure exceeds 1.2 inches w.c., or typically every 90 days under normal occupancy.",
+      "expected_keywords": ["1.2", "90", "filter"],
+      "reference_docs": ["hvac_unit7_manual.md"]
+    },
+    {
+      "id": "Q06",
+      "category": "hvac",
+      "question": "What should I do if HVAC Unit-7 motor current exceeds 20A?",
+      "gold_answer": "Sustained current above 20 A is a warning — inspect filters, belts, and coil fouling. Critical is above 24 A or repeated VFD overcurrent trips.",
+      "expected_keywords": ["20", "filter", "24"],
+      "reference_docs": ["hvac_unit7_manual.md"]
+    },
+    {
+      "id": "Q07",
+      "category": "hvac",
+      "question": "What supply-to-return air temperature difference indicates a cooling problem on HVAC Unit-7?",
+      "gold_answer": "If delta-T drops below 8°C for more than 48 hours, inspect refrigerant charge and coil cleanliness. Normal cooling delta-T is 13–16°C.",
+      "expected_keywords": ["8", "48", "refrigerant"],
+      "reference_docs": ["hvac_unit7_manual.md"]
+    },
+    {
+      "id": "Q08",
+      "category": "motor",
+      "question": "What are the critical vibration and bearing temperature limits for plant electric motors?",
+      "gold_answer": "Per the motor manual: vibration critical is >7.1 mm/s; bearing temperature critical is >85°C.",
+      "expected_keywords": ["7.1", "85"],
+      "reference_docs": ["motor_maintenance_manual.md"]
+    },
+    {
+      "id": "Q09",
+      "category": "motor",
+      "question": "What grease type should be used for electric motor bearings, and what is the risk of over-greasing?",
+      "gold_answer": "Use lithium complex grease NLGI Grade 2 (LUB-G2-LC). Over-greasing is a leading cause of bearing failure; purge old grease through the relief plug.",
+      "expected_keywords": ["lithium", "NLGI", "over-greasing"],
+      "reference_docs": ["motor_maintenance_manual.md"]
+    },
+    {
+      "id": "Q10",
+      "category": "bearing",
+      "question": "What indicates high bearing failure risk and when should a bearing be replaced rather than monitored?",
+      "gold_answer": "Replace if vibration is rising >10% per week, temperature exceeds critical threshold, or there is visible spalling, noise, or play. Monitor if vibration is stable and below warning with normal temperature.",
+      "expected_keywords": ["10%", "replace", "spalling"],
+      "reference_docs": ["bearing_failure_guide.md"]
+    },
+    {
+      "id": "Q11",
+      "category": "compressor",
+      "question": "What is the normal discharge pressure range for plant air compressors AC-1 through AC-3?",
+      "gold_answer": "Normal discharge pressure is 6.8–7.2 bar.",
+      "expected_keywords": ["6.8", "7.2", "bar"],
+      "reference_docs": ["compressor_sop.md"]
+    },
+    {
+      "id": "Q12",
+      "category": "compressor",
+      "question": "At what oil iron (Fe) level should compressor internal wear be investigated?",
+      "gold_answer": "Iron (Fe) above 50 ppm indicates internal wear — borescope investigation.",
+      "expected_keywords": ["50", "iron", "borescope"],
+      "reference_docs": ["compressor_sop.md"]
+    },
+    {
+      "id": "Q13",
+      "category": "conveyor",
+      "question": "What is the maximum allowed belt mistrack on the conveyor systems?",
+      "gold_answer": "Maximum belt mistrack is 25 mm from center at any point.",
+      "expected_keywords": ["25", "mm", "mistrack"],
+      "reference_docs": ["conveyor_system_guide.md"]
+    },
+    {
+      "id": "Q14",
+      "category": "conveyor",
+      "question": "When should conveyor idlers be replaced?",
+      "gold_answer": "Replace idlers for visual flat spots or seized rotation, shell wear >3 mm, or noise on rotation hand test.",
+      "expected_keywords": ["3 mm", "seized", "idler"],
+      "reference_docs": ["conveyor_system_guide.md"]
+    },
+    {
+      "id": "Q15",
+      "category": "safety",
+      "question": "What are the seven steps of the site lockout/tagout procedure EHS-LOTO-001?",
+      "gold_answer": "Notify personnel; shut down; isolate energy; apply locks/tags; release stored energy; verify zero energy; perform work.",
+      "expected_keywords": ["notify", "isolate", "verify", "lock"],
+      "reference_docs": ["safety_loto_procedures.txt"]
+    },
+    {
+      "id": "Q16",
+      "category": "safety",
+      "question": "Who may authorize emergency removal of a LOTO lock, and what form is used?",
+      "gold_answer": "Only the plant manager may authorize emergency lock removal. Document on form LOTO-EMR-01.",
+      "expected_keywords": ["plant manager", "LOTO-EMR-01"],
+      "reference_docs": ["safety_loto_procedures.txt"]
+    },
+    {
+      "id": "Q17",
+      "category": "pdm",
+      "question": "What are the PdM alert response SLAs for critical and high severity alerts?",
+      "gold_answer": "Critical: 4 hours. High: 24 hours. Medium: 72 hours. Low: next scheduled window.",
+      "expected_keywords": ["4 hours", "24 hours", "72"],
+      "reference_docs": ["predictive_maintenance_program.md"]
+    },
+    {
+      "id": "Q18",
+      "category": "vibration",
+      "question": "According to the vibration handbook severity chart, what mm/s RMS range is unsatisfactory and requires planned repair?",
+      "gold_answer": "7.1–18 mm/s RMS is unsatisfactory — plan repair. Above 18 is unacceptable — consider shutdown.",
+      "expected_keywords": ["7.1", "18", "unsatisfactory"],
+      "reference_docs": ["vibration_analysis_handbook.md"]
+    },
+    {
+      "id": "Q19",
+      "category": "fault_codes",
+      "question": "What does fault code VIB-CRIT-01 mean in the condition monitoring system?",
+      "gold_answer": "VIB-CRIT-01 means vibration exceeded critical threshold (variant 1), typically handled as a PdM work order within 24–72 hours per severity.",
+      "expected_keywords": ["vibration", "critical", "VIB-CRIT"],
+      "reference_docs": ["fault_code_reference.md"]
+    },
+    {
+      "id": "Q20",
+      "category": "compliance",
+      "question": "Which site LOTO standard must maintenance follow for OSHA 1910.147 compliance?",
+      "gold_answer": "Full compliance with site standard EHS-LOTO-001, with annual audit and training documented.",
+      "expected_keywords": ["EHS-LOTO-001", "1910.147"],
+      "reference_docs": ["regulatory_compliance_guide.md", "safety_loto_procedures.txt"]
+    }
+  ]
+}
