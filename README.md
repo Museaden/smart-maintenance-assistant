@@ -93,7 +93,7 @@ copy .env.example .env        # Windows
 ```env
 LLM_PROVIDER=groq
 GROQ_API_KEY=gsk_...
-GROQ_MODEL=llama-3.3-70b-versatile
+GROQ_MODEL=openai/gpt-oss-20b
 ```
 
 **Option B — OpenRouter:** [openrouter.ai/keys](https://openrouter.ai/keys)
@@ -203,7 +203,7 @@ smart-maintenance-assistant/
 |----------|---------|-------------|
 | `LLM_PROVIDER` | auto | `openrouter`, `groq`, `openai`, `ollama`, or `auto` |
 | `GROQ_API_KEY` | — | Groq API key |
-| `GROQ_MODEL` | llama-3.3-70b-versatile | Groq model name |
+| `GROQ_MODEL` | openai/gpt-oss-20b | Groq model name |
 | `OPENROUTER_API_KEY` | — | OpenRouter API key |
 | `OPENROUTER_MODEL` | openai/gpt-4o-mini | Model ID on OpenRouter |
 | `OPENAI_API_KEY` | — | OpenAI API key |

@@ -68,16 +68,15 @@ Provide a helpful answer with inline citations like [1], [2]."""
 
     try:
         return generate_answer(user_prompt)
-    except RuntimeError:
-        pass
-
-    return _extractive_fallback(question, context, citations), "extractive"
+    except RuntimeError as exc:
+        return _extractive_fallback(question, context, citations, error=str(exc)), "extractive"
 
 
 def _extractive_fallback(
     question: str,
     context: str,
     citations: list[SearchResult],
+    error: str | None = None,
 ) -> str:
     best_score = citations[0].score if citations else 0.0
     q_lower = question.lower()
@@ -113,13 +112,13 @@ def _extractive_fallback(
             + _llm_setup_note()
         )
 
-    # Ollama configured but unreachable
+    reason = error or "Ollama may not be running"
     return (
         f"**Question:** {question}\n\n"
-        "Could not reach an LLM (Ollama may not be running). "
+        f"Could not reach an LLM ({reason}). "
         "Showing the closest documentation excerpts:\n\n"
         f"{context}\n\n"
-        "Start Ollama, or add `GROQ_API_KEY` / `OPENROUTER_API_KEY` to `.env`."
+        "Check `GROQ_MODEL` in `.env`, or start Ollama."
     )
 
 

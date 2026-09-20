@@ -31,6 +31,7 @@ Thumbs.db
 # Streamlit
 **/.streamlit/secrets.toml
 
-# Nested local copy (do not commit)
+# Nested local copies (do not commit)
 smart-maintenance-assistant/
+finall project cv/
 

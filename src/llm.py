@@ -28,7 +28,7 @@ OPENROUTER_BASE_URL = _env("OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1"
 OPENROUTER_APP_URL = _env("OPENROUTER_APP_URL", "http://localhost:8501")
 OPENROUTER_APP_NAME = _env("OPENROUTER_APP_NAME", "Smart Maintenance Assistant")
 GROQ_API_KEY = _env("GROQ_API_KEY", "")
-GROQ_MODEL = _env("GROQ_MODEL", "llama-3.3-70b-versatile")
+GROQ_MODEL = _env("GROQ_MODEL", "openai/gpt-oss-20b")
 GROQ_BASE_URL = _env("GROQ_BASE_URL", "https://api.groq.com/openai/v1")
 OLLAMA_BASE_URL = _env("OLLAMA_BASE_URL", "http://localhost:11434")
 OLLAMA_MODEL = _env("OLLAMA_MODEL", "llama3.2")
@@ -106,13 +106,15 @@ def generate_answer(user_prompt: str) -> tuple[str, str]:
     provider = resolve_provider()
     chain = _provider_chain(provider)
 
+    last_error = None
     for name, caller in chain:
         try:
             return caller(user_prompt), name
-        except Exception:
+        except Exception as exc:
+            last_error = exc
             continue
 
-    raise RuntimeError("No LLM provider available")
+    raise RuntimeError(f"No LLM provider available: {last_error}")
 
 
 def _provider_chain(primary: str) -> list[tuple[str, Callable[[str], str]]]:
@@ -135,6 +137,9 @@ def _provider_chain(primary: str) -> list[tuple[str, Callable[[str], str]]]:
         if name == "groq" and not _valid_key(GROQ_API_KEY):
             continue
         if name == "openai" and not _valid_key(OPENAI_API_KEY):
+            continue
+        # Skip Ollama unless it is the chosen provider (cloud keys should not hide Groq errors)
+        if name == "ollama" and primary != "ollama" and is_llm_configured():
             continue
         chain.append(all_providers[name])
     return chain

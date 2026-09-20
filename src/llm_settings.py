@@ -28,7 +28,7 @@ OPENROUTER_APP_URL = _str("OPENROUTER_APP_URL", "http://localhost:8501")
 OPENROUTER_APP_NAME = _str("OPENROUTER_APP_NAME", "Smart Maintenance Assistant")
 
 GROQ_API_KEY = _str("GROQ_API_KEY", "")
-GROQ_MODEL = _str("GROQ_MODEL", "llama-3.3-70b-versatile")
+GROQ_MODEL = _str("GROQ_MODEL", "openai/gpt-oss-20b")
 GROQ_BASE_URL = _str("GROQ_BASE_URL", "https://api.groq.com/openai/v1")
 
 OLLAMA_BASE_URL = _str("OLLAMA_BASE_URL", "http://localhost:11434")
